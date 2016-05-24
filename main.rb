@@ -11,7 +11,7 @@ class JwtAuth
   def call env
     begin
       options = { algorithm: 'HS256', iss: ENV['JWT_ISSUER'] }
-      bearer = env.fetch('HTTP_AUTHORIZATION', '').slice(8..-1)
+      bearer = env.fetch('HTTP_AUTHORIZATION', '').slice(7..-1)
       payload, header = JWT.decode bearer, ENV['JWT_SECRET'], true, options
 
       env[:scopes] = payload['scopes']
